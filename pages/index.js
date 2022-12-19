@@ -1,41 +1,13 @@
-import { useState } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
-import { Button, ButtonGroup } from '@chakra-ui/react';
+import Link from 'next/link';
+
+import { Box, Container, Flex } from '@chakra-ui/react';
+
 import styles from '../styles/Home.module.css';
-import { ReactSpreadsheetImport } from 'react-spreadsheet-import';
 
 export default function Home() {
-  const [isOpen, setIsOpen] = useState(false);
-  const fields = [
-    {
-      // Visible in table header and when matching columns.
-      label: 'Name',
-      // This is the key used for this field when we call onSubmit.
-      key: 'name',
-      // Allows for better automatic column matching. Optional.
-      alternateMatches: ['first name', 'first'],
-      // Used when editing and validating information.
-      fieldType: {
-        // There are 3 types - "input" / "checkbox" / "select".
-        type: 'input',
-      },
-      // Used in the first step to provide an example of what data is expected in this field. Optional.
-      example: 'Stephanie',
-      // Can have multiple validations that are visible in Validation Step table.
-      validations: [
-        {
-          // Can be "required" / "unique" / "regex"
-          rule: 'required',
-          errorMessage: 'Name is required',
-          // There can be "info" / "warning" / "error" levels. Optional. Default "error".
-          level: 'error',
-        },
-      ],
-    },
-  ];
   return (
-    <div className={styles.container}>
+    <Container maxW='container.lg'>
       <Head>
         <title>pointSixtyFive Tools</title>
         <meta name='description' content='Admin tools for various features of pointsixtyfive.com' />
@@ -43,19 +15,35 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href='https://nextjs.org'>Next.js!</a>
-        </h1>
-        <Button colorScheme='blue' size={'md'} variant='solid' onClick={() => setIsOpen(true)}>
-          OPEN
-        </Button>
-        <ReactSpreadsheetImport
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          onSubmit={() => console.log('submit')}
-          fields={fields}
-        />
+        <h1 className={styles.title}>pointSixtyFive Tools</h1>
+
+        <Flex align='center' justify='center' wrap='wrap'>
+          <Link href='/ppt'>
+            <Box className={styles.card}>
+              <h2>Update PPT &rarr;</h2>
+              <p>Update applications with the current priority placement tool data.</p>
+            </Box>
+          </Link>
+
+          <a href='https://nextjs.org/learn' className={styles.card}>
+            <h2>Learn &rarr;</h2>
+            <p>Learn about Next.js in an interactive course with quizzes!</p>
+          </a>
+
+          <a href='https://github.com/vercel/next.js/tree/canary/examples' className={styles.card}>
+            <h2>Examples &rarr;</h2>
+            <p>Discover and deploy boilerplate example Next.js projects.</p>
+          </a>
+
+          <a
+            href='https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
+            className={styles.card}
+          >
+            <h2>Deploy &rarr;</h2>
+            <p>Instantly deploy your Next.js site to a public URL with Vercel.</p>
+          </a>
+        </Flex>
       </main>
-    </div>
+    </Container>
   );
 }
