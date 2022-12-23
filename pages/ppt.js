@@ -20,7 +20,7 @@ import styles from '../styles/Home.module.css';
 
 export default function Ppt() {
   const [isOpen, setIsOpen] = useState(false);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState();
 
   return (
     <Container maxW='container.lg'>
@@ -56,8 +56,7 @@ export default function Ppt() {
         <ReactSpreadsheetImport
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
-          onSubmit={(allData, invalidData, validData) => {
-            console.table(allData, invalidData, validData);
+          onSubmit={({ validData }) => {
             setData(validData);
           }}
           fields={pptFields}
@@ -66,7 +65,7 @@ export default function Ppt() {
         {data && (
           <>
             <pre>{JSON.stringify(data)}</pre>
-            <Button onClick={setData()}>Clear Data</Button>
+            <Button onClick={() => setData()}>Clear Data</Button>
           </>
         )}
 
