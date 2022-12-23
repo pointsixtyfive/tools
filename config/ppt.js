@@ -1,7 +1,7 @@
 export const pptFields = [
   {
     label: 'Service Area',
-    key: 'serviceArea',
+    key: 'Service Area',
     alternateMatches: ['Service Area'],
     fieldType: {
       type: 'input',
@@ -17,7 +17,7 @@ export const pptFields = [
   },
   {
     label: 'District',
-    key: 'district',
+    key: 'District',
     alternateMatches: ['District'],
     fieldType: {
       type: 'input',
@@ -33,7 +33,7 @@ export const pptFields = [
   },
   {
     label: 'Facility Type',
-    key: 'facilityType',
+    key: 'Facility Type',
     alternateMatches: ['Facility Type'],
     fieldType: {
       type: 'input',
@@ -49,7 +49,7 @@ export const pptFields = [
   },
   {
     label: 'Level',
-    key: 'level',
+    key: 'Level',
     alternateMatches: ['Level'],
     fieldType: {
       type: 'input',
@@ -65,7 +65,7 @@ export const pptFields = [
   },
   {
     label: 'Facility ID',
-    key: 'facilityId',
+    key: 'Facility ID',
     alternateMatches: ['Facility ID'],
     fieldType: {
       type: 'input',
@@ -81,7 +81,7 @@ export const pptFields = [
   },
   {
     label: 'Facility Name',
-    key: 'facilityName',
+    key: 'Facility Name',
     alternateMatches: ['Facility Name'],
     fieldType: {
       type: 'input',
@@ -97,7 +97,7 @@ export const pptFields = [
   },
   {
     label: 'CPC Target',
-    key: 'cpcTarget',
+    key: 'CPC Target',
     alternateMatches: ['CPC Target'],
     fieldType: {
       type: 'input',
@@ -113,7 +113,7 @@ export const pptFields = [
   },
   {
     label: 'Current # CPC On Board',
-    key: 'currentCpcOnBoard',
+    key: 'Current # of CPC On-Board',
     alternateMatches: ['Current # of CPC On-Board (SWB)'],
     fieldType: {
       type: 'input',
@@ -129,7 +129,7 @@ export const pptFields = [
   },
   {
     label: 'CPC on Temp',
-    key: 'cpcOnTemp',
+    key: 'CPC on Temp',
     alternateMatches: ['CPC on Temp (SWB)'],
     fieldType: {
       type: 'input',
@@ -145,7 +145,7 @@ export const pptFields = [
   },
   {
     label: 'CPC on Long Term Hold',
-    key: 'cpcOnLongTermHold',
+    key: 'CPC on Long Term Hold',
     alternateMatches: ['CPC on Long Term Hold (SWB)'],
     fieldType: {
       type: 'input',
@@ -161,7 +161,7 @@ export const pptFields = [
   },
   {
     label: 'Current # CPC minus Temps & LTH',
-    key: 'currentCpcMinusTempsLth',
+    key: 'Current # of CPC On-Board minus Temps minus LTH',
     alternateMatches: ['Current # of CPC On-Board minus Temps minus LTH (Calculation)'],
     fieldType: {
       type: 'input',
@@ -177,7 +177,7 @@ export const pptFields = [
   },
   {
     label: 'Current % CPC Target',
-    key: 'currentPercentCpcTarget',
+    key: 'Current % CPC to Target',
     alternateMatches: ['Current % CPC to Target (Calculation)'],
     fieldType: {
       type: 'input',
@@ -193,7 +193,7 @@ export const pptFields = [
   },
   {
     label: 'Training Time',
-    key: 'trainingTime',
+    key: 'Training Time Years',
     alternateMatches: ['Training Time Years (NTD)'],
     fieldType: {
       type: 'input',
@@ -209,7 +209,7 @@ export const pptFields = [
   },
   {
     label: 'ATCS in Training',
-    key: 'atcsInTraining',
+    key: 'ATCS in Training',
     alternateMatches: ['ATCS in Training (SWB)'],
     fieldType: {
       type: 'input',
@@ -225,7 +225,7 @@ export const pptFields = [
   },
   {
     label: 'ATCS in Training on LTH',
-    key: 'atcsInTrainingOnLth',
+    key: 'ATCS in Training on Long Term Hold',
     alternateMatches: ['ATCS in Training on Long Term Hold (SWB)'],
     fieldType: {
       type: 'input',
@@ -241,7 +241,7 @@ export const pptFields = [
   },
   {
     label: 'ATCS in Training Minus LTH',
-    key: 'atcsInTrainingMinusLth',
+    key: 'ATCS in Training minus LTH',
     alternateMatches: ['ATCS in Training minus LTH (Calculation)'],
     fieldType: {
       type: 'input',
@@ -257,7 +257,7 @@ export const pptFields = [
   },
   {
     label: 'Training Success Rate',
-    key: 'trainingSuccessRate',
+    key: 'Training Success Rate',
     alternateMatches: ['Training Success Rate      (NTD)'],
     fieldType: {
       type: 'input',
@@ -273,7 +273,7 @@ export const pptFields = [
   },
   {
     label: 'ATCS Expected to Cert',
-    key: 'atcsExpectedToCert',
+    key: 'Current ATCS in Training Expected to Cert',
     alternateMatches: ['Current ATCS in Training Expected to Cert (Calculation)'],
     fieldType: {
       type: 'input',
@@ -289,7 +289,7 @@ export const pptFields = [
   },
   {
     label: 'Committed Inbound',
-    key: 'committedInbound',
+    key: 'Committed ATCS Inbound',
     alternateMatches: ['Committed ATCS Inbound (SWB)'],
     fieldType: {
       type: 'input',
@@ -305,7 +305,7 @@ export const pptFields = [
   },
   {
     label: 'Placement List Inbounds',
-    key: 'placementListInbounds',
+    key: 'Placement List Inbounds',
     alternateMatches: ['Placement List Inbounds'],
     fieldType: {
       type: 'input',
@@ -321,7 +321,7 @@ export const pptFields = [
   },
   {
     label: 'Temps Inbound',
-    key: 'tempsInbound',
+    key: 'Temps Inbound',
     alternateMatches: ['Temps Inbound (SWB)'],
     fieldType: {
       type: 'input',
@@ -337,7 +337,7 @@ export const pptFields = [
   },
   {
     label: 'Inbounds Expected to Cert + Temps',
-    key: 'inboundsExpectedToCertPlusTempsInbound',
+    key: 'Inbounds Expected to Cert + Temps Inbound',
     alternateMatches: ['Inbounds Expected to Cert + Temps Inbound (Calculation)'],
     fieldType: {
       type: 'input',
@@ -353,7 +353,7 @@ export const pptFields = [
   },
   {
     label: 'Committed ATCS Outbound',
-    key: 'committedAtcsOutbound',
+    key: 'Committed ATCS Outbound',
     alternateMatches: ['Committed ATCS Outbound (SWB)'],
     fieldType: {
       type: 'input',
@@ -369,7 +369,7 @@ export const pptFields = [
   },
   {
     label: 'Placement List Outbounds',
-    key: 'placementListOutbounds',
+    key: 'Placement List Outbounds',
     alternateMatches: ['Placement List Outbounds (ERR, Hardship)'],
     fieldType: {
       type: 'input',
@@ -385,7 +385,7 @@ export const pptFields = [
   },
   {
     label: 'Temps Outbound',
-    key: 'tempsOutbound',
+    key: 'Temps Outbound',
     alternateMatches: ['Temps Outbound (SWB)'],
     fieldType: {
       type: 'input',
@@ -401,7 +401,7 @@ export const pptFields = [
   },
   {
     label: 'Projected Retirements and Other Losses',
-    key: 'projectedRetirementsAndOtherLosses',
+    key: 'Projected Retirements and Other Losses',
     alternateMatches: ['Projected Retirements and Other Losses (Finance)'],
     fieldType: {
       type: 'input',
@@ -417,7 +417,7 @@ export const pptFields = [
   },
   {
     label: 'Projected % to Target',
-    key: 'projectedPercentToTarget',
+    key: 'Projected % to Target',
     alternateMatches: ['Projected % to Target (Calculation)'],
     fieldType: {
       type: 'input',
@@ -433,7 +433,7 @@ export const pptFields = [
   },
   {
     label: 'Possible Gains to National Average',
-    key: 'possibleGainsToNationalAverage',
+    key: 'Possible Gains to National Average',
     alternateMatches: ['Possible Gains to National Average (Calculation)'],
     fieldType: {
       type: 'input',
@@ -449,7 +449,7 @@ export const pptFields = [
   },
   {
     label: 'Possible Gains to Target',
-    key: 'possibleGainsToTarget',
+    key: 'Possible Gains to Target',
     alternateMatches: ['Possible Gains to Target (Calculation)'],
     fieldType: {
       type: 'input',
@@ -465,7 +465,7 @@ export const pptFields = [
   },
   {
     label: 'ERR Category',
-    key: 'errCategory',
+    key: 'ERR Category',
     alternateMatches: ['ERR Category'],
     fieldType: {
       type: 'input',
@@ -481,7 +481,7 @@ export const pptFields = [
   },
   {
     label: 'Possible Losses',
-    key: 'possibleLosses',
+    key: 'Possible Losses',
     alternateMatches: ['Possible Losses'],
     fieldType: {
       type: 'input',
@@ -497,7 +497,7 @@ export const pptFields = [
   },
   {
     label: 'Current % Trainees to ATCS',
-    key: 'currentPercentTraineesToAtcs',
+    key: 'Current % CPC to Trainees',
     alternateMatches: ['Current % Trainees to ATCS'],
     fieldType: {
       type: 'input',
@@ -513,7 +513,7 @@ export const pptFields = [
   },
   {
     label: 'TNE',
-    key: 'tne',
+    key: 'TNE',
     alternateMatches: ['TNE (SWB)'],
     fieldType: {
       type: 'input',
@@ -529,7 +529,7 @@ export const pptFields = [
   },
   {
     label: 'AG',
-    key: 'ag',
+    key: 'AG',
     alternateMatches: ['AG (SWB)'],
     fieldType: {
       type: 'input',
@@ -545,7 +545,7 @@ export const pptFields = [
   },
   {
     label: 'Dev1',
-    key: 'dev1',
+    key: 'Dev1',
     alternateMatches: ['Dev1 (SWB)'],
     fieldType: {
       type: 'input',
@@ -561,7 +561,7 @@ export const pptFields = [
   },
   {
     label: 'Dev2',
-    key: 'dev2',
+    key: 'Dev2',
     alternateMatches: ['Dev2 (SWB)'],
     fieldType: {
       type: 'input',
@@ -577,7 +577,7 @@ export const pptFields = [
   },
   {
     label: 'Dev3',
-    key: 'dev3',
+    key: 'Dev3',
     alternateMatches: ['Dev3 (SWB)'],
     fieldType: {
       type: 'input',
@@ -593,7 +593,7 @@ export const pptFields = [
   },
   {
     label: 'Dev Total',
-    key: 'devTotal',
+    key: 'Dev Total',
     alternateMatches: ['Dev Total (SWB)'],
     fieldType: {
       type: 'input',
@@ -609,7 +609,7 @@ export const pptFields = [
   },
   {
     label: 'CPCIT0',
-    key: 'cpcit0',
+    key: 'CPCIT0',
     alternateMatches: ['CPCIT0 (SWB)'],
     fieldType: {
       type: 'input',
@@ -625,7 +625,7 @@ export const pptFields = [
   },
   {
     label: 'CPCIT1',
-    key: 'cpcit1',
+    key: 'CPCIT1',
     alternateMatches: ['CPCIT1 (SWB)'],
     fieldType: {
       type: 'input',
@@ -641,7 +641,7 @@ export const pptFields = [
   },
   {
     label: 'CPCIT2',
-    key: 'cpcit2',
+    key: 'CPCIT2',
     alternateMatches: ['CPCIT2 (SWB)'],
     fieldType: {
       type: 'input',
@@ -657,7 +657,7 @@ export const pptFields = [
   },
   {
     label: 'CPCIT3',
-    key: 'cpcit3',
+    key: 'CPCIT3',
     alternateMatches: ['CPCIT3 (SWB)'],
     fieldType: {
       type: 'input',
@@ -673,7 +673,7 @@ export const pptFields = [
   },
   {
     label: 'CPCIT Total',
-    key: 'cpcitTotal',
+    key: 'CPCIT Total',
     alternateMatches: ['CPCIT Total (SWB)'],
     fieldType: {
       type: 'input',
@@ -689,7 +689,7 @@ export const pptFields = [
   },
   {
     label: 'EnRoute or Terminal',
-    key: 'enrouteOrTerminal',
+    key: 'EnRoute or Terminal',
     alternateMatches: ['EnRoute or Terminal'],
     fieldType: {
       type: 'input',
@@ -705,7 +705,7 @@ export const pptFields = [
   },
   {
     label: 'HR Region',
-    key: 'hrRegion',
+    key: 'HRRegion',
     alternateMatches: ['HRRegion'],
     fieldType: {
       type: 'input',
@@ -721,7 +721,7 @@ export const pptFields = [
   },
   {
     label: 'Core Airport',
-    key: 'coreAirport',
+    key: 'CoreAirport',
     alternateMatches: ['CoreAirport'],
     fieldType: {
       type: 'input',
@@ -737,7 +737,7 @@ export const pptFields = [
   },
   {
     label: 'Type',
-    key: 'type',
+    key: 'Type',
     alternateMatches: ['Type'],
     fieldType: {
       type: 'input',

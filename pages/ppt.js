@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 import Head from 'next/head';
 import { ReactSpreadsheetImport } from 'react-spreadsheet-import';
 
@@ -58,6 +59,7 @@ export default function Ppt() {
           onClose={() => setIsOpen(false)}
           onSubmit={({ validData }) => {
             setData(validData);
+            axios.post('api/submit', validData);
           }}
           fields={pptFields}
         />
