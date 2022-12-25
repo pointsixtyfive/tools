@@ -1,16 +1,12 @@
-// import clientPromise from '../../db/mongodb';
 import dbConnect from '../../db/dbConnect';
 import FacilityPptData from '../../db/models/FacilityPptData';
 
 export default async function submit(req, res) {
-  // const client = await clientPromise;
   await dbConnect();
   const { body: data, method } = req;
 
   try {
-    // const db = await client.db();
     if (method === 'POST') {
-      // const pptCollection = await db.collection('pptdata');
       const result = await FacilityPptData.bulkWrite(
         data.map((doc) => ({
           updateOne: {

@@ -4,14 +4,22 @@ import { ReactSpreadsheetImport } from 'react-spreadsheet-import';
 import Head from 'next/head';
 
 import {
+  Box,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Code,
   Container,
-  Divider,
   Flex,
-  Stack,
+  ListItem,
+  OrderedList,
   Spinner,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Td,
+  Th,
   Text,
   useToast,
 } from '@chakra-ui/react';
@@ -75,17 +83,55 @@ export default function Ppt() {
       <main className={styles.main}>
         <h1 className={styles.title}>Update PPT</h1>
 
-        <Stack direction={'row'} h='250px' p={4}>
-          <Divider orientation='vertical' />
-          <Stack direction='column' h='250px' p={4}>
-            <Text>1) Select file to upload.</Text>
-            <Text>2) Select row which contains the table headers.</Text>
-            <Text>
-              3) Verify columns match between the input & output (green checkmark). If not, use the dropdown to match
-              the input column with the correct output column.
-            </Text>
-          </Stack>
-        </Stack>
+        <Box p={4} style={{ borderLeft: '2px solid blue' }}>
+          <OrderedList>
+            <ListItem>
+              <Text>
+                Modify the excel sheet by inserting the below data into rows at the end of the PPT. Copy-paste the{' '}
+                <Code>National</Code> data into it&apos;s row. Only the date of the PPT should go in the{' '}
+                <Code>Updated</Code> row.
+                <Text>
+                  <Code>
+                    <Table variant='unstyled' size='sm'>
+                      <Thead>
+                        <Tr>
+                          <Th>Facility ID</Th>
+                          <Th>Facility Name</Th>
+                        </Tr>
+                      </Thead>
+                      <Tbody>
+                        <Tr>
+                          <Td>National</Td>
+                          <Td></Td>
+                        </Tr>
+                        <Tr>
+                          <Td>Updated</Td>
+                          <Td>12/25/2022</Td>
+                        </Tr>
+                      </Tbody>
+                    </Table>
+                  </Code>
+                </Text>
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>Upload file.</Text>
+            </ListItem>
+            <ListItem>
+              <Text>Select row which contains the table headers.</Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                Verify columns match between the input & output (green checkmark). If not, use the dropdown to match the
+                input column with the correct output column.
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>Verify there are no errors. National data may be missing fields (ie: Category).</Text>
+            </ListItem>
+          </OrderedList>
+        </Box>
+
         <ReactSpreadsheetImport
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
