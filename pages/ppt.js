@@ -1,18 +1,19 @@
 import { useState } from 'react';
 import axios from 'axios';
-import Head from 'next/head';
 import { ReactSpreadsheetImport } from 'react-spreadsheet-import';
+import Head from 'next/head';
 
 import {
-  Container,
-  Divider,
-  Flex,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Container,
+  Divider,
+  Flex,
   Stack,
+  Spinner,
   Text,
-  Button,
+  useToast,
 } from '@chakra-ui/react';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 
@@ -21,7 +22,38 @@ import styles from '../styles/Home.module.css';
 
 export default function Ppt() {
   const [isOpen, setIsOpen] = useState(false);
-  const [data, setData] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [responseData, setResponseData] = useState({});
+  const toast = useToast();
+  const toastSuccess = {
+    title: 'Success',
+    description: `${responseData?.nModified} records updated.`,
+    status: 'success',
+    duration: 2500,
+    isClosable: true,
+  };
+  const toastError = {
+    title: 'Error',
+    description: `There was an error. Error ${responseData.status}`,
+    status: 'error',
+    duration: 2500,
+    isClosable: true,
+  };
+
+  async function handleSubmit(validData) {
+    setIsLoading(true);
+    const response = await axios.post('api/submit', validData);
+    setIsLoading(false);
+
+    const { data } = response;
+    setResponseData(data);
+
+    if (data.ok) {
+      toast(toastSuccess);
+    } else {
+      toast(toastError);
+    }
+  }
 
   return (
     <Container maxW='container.lg'>
@@ -57,25 +89,19 @@ export default function Ppt() {
         <ReactSpreadsheetImport
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
-          onSubmit={({ validData }) => {
-            setData(validData);
-            axios.post('api/submit', validData);
-          }}
+          onSubmit={({ validData }) => handleSubmit(validData)}
           fields={pptFields}
         />
 
-        {data && (
-          <>
-            <pre>{JSON.stringify(data)}</pre>
-            <Button onClick={() => setData()}>Clear Data</Button>
-          </>
-        )}
-
         <Flex align='center' justify='center' wrap='wrap'>
-          <div className={styles.card} onClick={() => setIsOpen(true)}>
-            <h2>Upload spreadsheet &rarr;</h2>
-            <p>Click here to begin.</p>
-          </div>
+          {isLoading ? (
+            <Spinner thickness='4px' speed='1s' emptyColor='gray.200' color='blue.500' size='xl' />
+          ) : (
+            <div className={styles.card} onClick={() => setIsOpen(true)}>
+              <h2>Upload spreadsheet &rarr;</h2>
+              <p>Click here to begin.</p>
+            </div>
+          )}
         </Flex>
       </main>
     </Container>

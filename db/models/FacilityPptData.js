@@ -53,4 +53,4 @@ const pptdataSchema = new mongoose.Schema(
   { collection: 'pptdata', timestamps: true }
 );
 
-export default pptdataSchema;
+export default mongoose.models.FacilityPptData || mongoose.model('FacilityPptData', pptdataSchema);

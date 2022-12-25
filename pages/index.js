@@ -1,4 +1,5 @@
-import clientPromise from '../db/mongodb';
+// import clientPromise from '../db/mongodb';
+import dbConnect from '../db/dbConnect';
 
 import Head from 'next/head';
 import Link from 'next/link';
@@ -59,7 +60,7 @@ export default function Home({ isConnected }) {
 
 export async function getServerSideProps(context) {
   try {
-    await clientPromise;
+    // await clientPromise;
     // `await clientPromise` will use the default database passed in the MONGODB_URI
     // However you can use another database (e.g. myDatabase) by replacing the `await clientPromise` with the following code:
     //
@@ -69,6 +70,8 @@ export async function getServerSideProps(context) {
     // Then you can execute queries against your database like so:
     // db.find({}) or any of the MongoDB Node Driver commands
 
+    await dbConnect();
+    // const isConnected = client.connection.readyState === 1
     return {
       props: { isConnected: true },
     };
