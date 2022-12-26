@@ -105,7 +105,7 @@ export const pptFields = [
     example: '45',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -121,7 +121,7 @@ export const pptFields = [
     example: '20',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -137,7 +137,7 @@ export const pptFields = [
     example: '5',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -153,7 +153,7 @@ export const pptFields = [
     example: '2',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -169,7 +169,7 @@ export const pptFields = [
     example: '2',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -185,7 +185,7 @@ export const pptFields = [
     example: '83.5',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -201,7 +201,7 @@ export const pptFields = [
     example: '1.45',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -217,7 +217,7 @@ export const pptFields = [
     example: '4',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -233,7 +233,7 @@ export const pptFields = [
     example: '2',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -249,7 +249,7 @@ export const pptFields = [
     example: '0',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -265,7 +265,7 @@ export const pptFields = [
     example: '90.5',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -281,7 +281,7 @@ export const pptFields = [
     example: '4.5',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -297,7 +297,7 @@ export const pptFields = [
     example: '2',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -313,7 +313,7 @@ export const pptFields = [
     example: '2',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -329,7 +329,7 @@ export const pptFields = [
     example: '0',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -345,7 +345,7 @@ export const pptFields = [
     example: '3',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -361,7 +361,7 @@ export const pptFields = [
     example: '1',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -377,7 +377,7 @@ export const pptFields = [
     example: '1',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -393,7 +393,7 @@ export const pptFields = [
     example: '0',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -409,7 +409,7 @@ export const pptFields = [
     example: '5.5',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -425,7 +425,7 @@ export const pptFields = [
     example: '85.5',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -441,7 +441,7 @@ export const pptFields = [
     example: '6',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -457,7 +457,7 @@ export const pptFields = [
     example: '5',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -473,7 +473,7 @@ export const pptFields = [
     example: '1',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -489,7 +489,7 @@ export const pptFields = [
     example: '2',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -505,7 +505,7 @@ export const pptFields = [
     example: '20.5',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -521,7 +521,7 @@ export const pptFields = [
     example: '0',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -537,7 +537,7 @@ export const pptFields = [
     example: '2',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -553,7 +553,7 @@ export const pptFields = [
     example: '1',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -569,7 +569,7 @@ export const pptFields = [
     example: '1',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -585,7 +585,7 @@ export const pptFields = [
     example: '1',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -601,7 +601,7 @@ export const pptFields = [
     example: '5',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -617,7 +617,7 @@ export const pptFields = [
     example: '5',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -633,7 +633,7 @@ export const pptFields = [
     example: '2',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -649,7 +649,7 @@ export const pptFields = [
     example: '2',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -665,7 +665,7 @@ export const pptFields = [
     example: '2',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },
@@ -681,7 +681,7 @@ export const pptFields = [
     example: '5',
     validations: [
       {
-        // rule: 'required',
+        rule: 'required',
         errorMessage: 'Required',
         level: 'error',
       },

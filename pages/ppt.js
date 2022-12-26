@@ -31,22 +31,7 @@ import styles from '../styles/Home.module.css';
 export default function Ppt() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [responseData, setResponseData] = useState({});
   const toast = useToast();
-  const toastSuccess = {
-    title: 'Success',
-    description: `${responseData?.nModified} records updated.`,
-    status: 'success',
-    duration: 2500,
-    isClosable: true,
-  };
-  const toastError = {
-    title: 'Error',
-    description: `There was an error. Error ${responseData.status}`,
-    status: 'error',
-    duration: 2500,
-    isClosable: true,
-  };
 
   async function handleSubmit(validData) {
     setIsLoading(true);
@@ -54,11 +39,25 @@ export default function Ppt() {
     setIsLoading(false);
 
     const { data } = response;
-    setResponseData(data);
+    console.log(response);
 
     if (data.ok) {
+      const toastSuccess = {
+        title: 'Success',
+        description: `${data?.nModified} records updated.`,
+        status: 'success',
+        duration: 2500,
+        isClosable: true,
+      };
       toast(toastSuccess);
     } else {
+      const toastError = {
+        title: 'Error',
+        description: `There was an error. Error ${response.status}`,
+        status: 'error',
+        duration: 2500,
+        isClosable: true,
+      };
       toast(toastError);
     }
   }

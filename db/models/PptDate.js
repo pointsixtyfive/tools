@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const pptdataSchema = new mongoose.Schema(
+const PptDateSchema = new mongoose.Schema(
   {
     'Service Area': { type: String, default: '' },
     District: { type: String, default: '' },
@@ -53,4 +53,4 @@ const pptdataSchema = new mongoose.Schema(
   { collection: 'pptdata', timestamps: true }
 );
 
-export default mongoose.models.FacilityPptData || mongoose.model('FacilityPptData', pptdataSchema);
+export default mongoose.models.PptDate || mongoose.model('PptDate', PptDateSchema);
