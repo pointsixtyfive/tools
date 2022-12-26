@@ -3,14 +3,19 @@ import axios from 'axios';
 import { ReactSpreadsheetImport } from 'react-spreadsheet-import';
 import Head from 'next/head';
 
+import dbConnect from '../db/dbConnect';
+import PptDate from '../db/models/PptDate';
+
 import {
   Box,
+  Button,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   Code,
   Container,
   Flex,
+  Input,
   ListItem,
   OrderedList,
   Spinner,
@@ -22,16 +27,33 @@ import {
   Th,
   Text,
   useToast,
+  Stack,
 } from '@chakra-ui/react';
-import { ChevronRightIcon } from '@chakra-ui/icons';
+import { ChevronRightIcon, CheckCircleIcon } from '@chakra-ui/icons';
 
 import { pptFields } from '../config/ppt';
 import styles from '../styles/Home.module.css';
 
-export default function Ppt() {
+export default function Ppt({ dbPptDate }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [dateIsLoading, setDateIsLoading] = useState(false);
+  const [newDate, setNewDate] = useState('');
+  const [currentPptDate, setCurrentPptDate] = useState(dbPptDate);
   const toast = useToast();
+  const dateRegex = new RegExp('^(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])/20\\d\\d$');
+
+  const toastCfg = { duration: 2500, isClosable: true, description: `` };
+  const toastSuccess = {
+    ...toastCfg,
+    title: 'Success',
+    status: 'success',
+  };
+  const toastError = {
+    ...toastCfg,
+    title: 'Error',
+    status: 'error',
+  };
 
   async function handleSubmit(validData) {
     setIsLoading(true);
@@ -39,27 +61,45 @@ export default function Ppt() {
     setIsLoading(false);
 
     const { data } = response;
-    console.log(response);
 
-    if (data.ok) {
-      const toastSuccess = {
-        title: 'Success',
-        description: `${data?.nModified} records updated.`,
-        status: 'success',
-        duration: 2500,
-        isClosable: true,
-      };
+    if (response.status === 201) {
+      toastSuccess.description = `${data?.nModified + data?.nInserted + data?.nUpserted} records updated.`;
       toast(toastSuccess);
     } else {
-      const toastError = {
-        title: 'Error',
-        description: `There was an error. Error ${response.status}`,
-        status: 'error',
-        duration: 2500,
-        isClosable: true,
-      };
+      toastError.description = `There was an error. Error ${response.status}`;
       toast(toastError);
     }
+  }
+
+  async function updatePptDate(updatedDate) {
+    if (!dateRegex.test(newDate)) {
+      toastError.description = 'The date format should be MM/DD/YYYY';
+      toast(toastError);
+      return;
+    }
+
+    if (newDate.match(currentPptDate)) {
+      toastError.description = 'This date matches the current data.';
+      toast(toastError);
+      return;
+    }
+
+    setDateIsLoading(true);
+    const response = await axios.post(`api/submit?date=${updatedDate}`);
+    setDateIsLoading(false);
+
+    const { data } = response;
+
+    if (response.status === 201) {
+      toastSuccess.description = `Date updated.`;
+      toast(toastSuccess);
+      setCurrentPptDate(data.newDate);
+    } else {
+      toastError.description = `There was an error. Error ${response.status}`;
+      toast(toastError);
+    }
+
+    setNewDate('');
   }
 
   return (
@@ -79,6 +119,7 @@ export default function Ppt() {
           </BreadcrumbItem>
         </Breadcrumb>
       </nav>
+
       <main className={styles.main}>
         <h1 className={styles.title}>Update PPT</h1>
 
@@ -86,26 +127,21 @@ export default function Ppt() {
           <OrderedList>
             <ListItem>
               <Text>
-                Modify the excel sheet by inserting the below data into rows at the end of the PPT. Copy-paste the{' '}
-                <Code>National</Code> data into it&apos;s row. Only the date of the PPT should go in the{' '}
-                <Code>Updated</Code> row.
+                Modify the excel sheet by inserting the <Code>National</Code> data into rows at the end of the PPT.
+                Copy-paste the <Code>National</Code> data into it&apos;s row.
                 <Text>
                   <Code>
                     <Table variant='unstyled' size='sm'>
                       <Thead>
                         <Tr>
                           <Th>Facility ID</Th>
-                          <Th>Facility Name</Th>
+                          <Th>...etc</Th>
                         </Tr>
                       </Thead>
                       <Tbody>
                         <Tr>
                           <Td>National</Td>
-                          <Td></Td>
-                        </Tr>
-                        <Tr>
-                          <Td>Updated</Td>
-                          <Td>12/25/2022</Td>
+                          <Td>...data</Td>
                         </Tr>
                       </Tbody>
                     </Table>
@@ -117,16 +153,20 @@ export default function Ppt() {
               <Text>Upload file.</Text>
             </ListItem>
             <ListItem>
-              <Text>Select row which contains the table headers.</Text>
+              <Text>Select row containing the table headers.</Text>
             </ListItem>
             <ListItem>
               <Text>
-                Verify columns match between the input & output (green checkmark). If not, use the dropdown to match the
-                input column with the correct output column.
+                Verify columns match between the input & output (<CheckCircleIcon color={'green.500'} />
+                ). If not, use the dropdown to match the input column with the correct output column. This should occur
+                automatically. If not, something may be wrong with the excel file.
               </Text>
             </ListItem>
             <ListItem>
               <Text>Verify there are no errors. National data may be missing fields (ie: Category).</Text>
+            </ListItem>
+            <ListItem>
+              <Text>The PPT date stored in the database is displayed. Update the date with the new PPT date. </Text>
             </ListItem>
           </OrderedList>
         </Box>
@@ -137,6 +177,32 @@ export default function Ppt() {
           onSubmit={({ validData }) => handleSubmit(validData)}
           fields={pptFields}
         />
+
+        <Flex align='center' justify='center' wrap='wrap'>
+          <Stack>
+            <Flex gap={2}>
+              <Text>Current PPT Date:</Text>
+              <Text flex={1} align='center'>
+                {currentPptDate}
+              </Text>
+            </Flex>
+            <Flex gap={2}>
+              <Input
+                name='newDate'
+                placeholder='MM/DD/YYYY'
+                size='md'
+                width='14ch'
+                value={newDate}
+                onChange={(e) => setNewDate(e.target.value)}
+                title='Input date in format MM/DD/YYYY'
+                pattern='^(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])/20\d\d$'
+              />
+              <Button isLoading={dateIsLoading} loadingText='Updating' onClick={() => updatePptDate(newDate)}>
+                Update Date
+              </Button>
+            </Flex>
+          </Stack>
+        </Flex>
 
         <Flex align='center' justify='center' wrap='wrap'>
           {isLoading ? (
@@ -151,4 +217,13 @@ export default function Ppt() {
       </main>
     </Container>
   );
+}
+
+export async function getStaticProps() {
+  await dbConnect();
+
+  const result = await PptDate.findOne({ 'Facility ID': 'Updated' });
+  console.log(result);
+
+  return { props: { dbPptDate: result['Facility Name'] } };
 }
