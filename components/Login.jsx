@@ -1,17 +1,14 @@
-import { useUser } from '@auth0/nextjs-auth0/client';
-import Link from 'next/link';
+/* eslint-disable @next/next/no-html-link-for-pages */
+import { InfoIcon } from '@chakra-ui/icons';
+import styles from '../styles/Home.module.css';
 
 export default function Login() {
-  const { user, error, isLoading } = useUser();
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>{error.message}</div>;
-
-  if (user) {
-    return (
-      <div>
-        Welcome {user.name}! <Link href='/api/auth/logout'>Logout</Link>
-      </div>
-    );
-  }
+  return (
+    <a href='/api/auth/login' className={styles.card}>
+      <h2>
+        Login <InfoIcon />
+      </h2>
+      <p>Login to begin</p>
+    </a>
+  );
 }

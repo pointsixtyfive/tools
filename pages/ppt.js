@@ -3,9 +3,6 @@ import axios from 'axios';
 import { ReactSpreadsheetImport } from 'react-spreadsheet-import';
 import Head from 'next/head';
 
-import dbConnect from '../db/dbConnect';
-import PptDate from '../db/models/PptDate';
-
 import {
   Box,
   Button,
@@ -30,6 +27,8 @@ import {
 } from '@chakra-ui/react';
 import { ChevronRightIcon, CheckCircleIcon } from '@chakra-ui/icons';
 
+import dbConnect from '../db/dbConnect';
+import PptDate from '../db/models/PptDate';
 import { pptFields } from '../config/ppt';
 import styles from '../styles/Home.module.css';
 
@@ -156,7 +155,7 @@ export default function Ppt({ dbPptDate }) {
             </ListItem>
             <ListItem>
               <Text>
-                Verify columns match between the input & output (<CheckCircleIcon color={'green.500'} />
+                Verify columns match between the input & output (<CheckCircleIcon color='green.500' />
                 ). If not, use the dropdown to match the input column with the correct output column. This should occur
                 automatically. If not, something may be wrong with the excel file.
               </Text>
@@ -222,7 +221,6 @@ export async function getStaticProps() {
   await dbConnect();
 
   const result = await PptDate.findOne({ 'Facility ID': 'Updated' });
-  console.log(result);
 
   return { props: { dbPptDate: result['Facility Name'] } };
 }
