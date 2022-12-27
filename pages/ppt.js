@@ -124,47 +124,35 @@ export default function Ppt({ dbPptDate }) {
         <Box p={4} style={{ borderLeft: '2px solid blue' }}>
           <OrderedList>
             <ListItem>
-              <Text>
-                Modify the excel sheet by inserting the <Code>National</Code> data into rows at the end of the PPT.
-                Copy-paste the <Code>National</Code> data into it&apos;s row.
-                <Text>
-                  <Code>
-                    <Table variant='unstyled' size='sm'>
-                      <Thead>
-                        <Tr>
-                          <Th>Facility ID</Th>
-                          <Th>...etc</Th>
-                        </Tr>
-                      </Thead>
-                      <Tbody>
-                        <Tr>
-                          <Td>National</Td>
-                          <Td>...data</Td>
-                        </Tr>
-                      </Tbody>
-                    </Table>
-                  </Code>
-                </Text>
-              </Text>
+              Modify the excel sheet by inserting the <Code>National</Code> data into rows at the end of the PPT.
+              Copy-paste the <Code>National</Code> data into it&apos;s row.
+              <Code display='block' maxWidth='fit-content'>
+                <Table variant='unstyled' size='sm'>
+                  <Thead>
+                    <Tr>
+                      <Th>Facility ID</Th>
+                      <Th>...etc</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    <Tr>
+                      <Td>National</Td>
+                      <Td>...data</Td>
+                    </Tr>
+                  </Tbody>
+                </Table>
+              </Code>
             </ListItem>
+            <ListItem>Upload file</ListItem>
+            <ListItem>Select row containing the table headers</ListItem>
             <ListItem>
-              <Text>Upload file.</Text>
+              Verify columns match between the input & output (<CheckCircleIcon color='green.500' />
+              ). If not, use the dropdown to match the input column with the correct output column. This should occur
+              automatically. If not, something may be wrong with the excel file.
             </ListItem>
+            <ListItem>Verify there are no errors. National data may be missing fields (ie: Category)</ListItem>
             <ListItem>
-              <Text>Select row containing the table headers.</Text>
-            </ListItem>
-            <ListItem>
-              <Text>
-                Verify columns match between the input & output (<CheckCircleIcon color='green.500' />
-                ). If not, use the dropdown to match the input column with the correct output column. This should occur
-                automatically. If not, something may be wrong with the excel file.
-              </Text>
-            </ListItem>
-            <ListItem>
-              <Text>Verify there are no errors. National data may be missing fields (ie: Category).</Text>
-            </ListItem>
-            <ListItem>
-              <Text>The PPT date stored in the database is displayed. Update the date with the new PPT date. </Text>
+              The PPT date stored in the database is displayed. Update the date with the new PPT date.
             </ListItem>
           </OrderedList>
         </Box>
