@@ -13,7 +13,6 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   Code,
-  Container,
   Flex,
   Input,
   ListItem,
@@ -103,12 +102,12 @@ export default function Ppt({ dbPptDate }) {
   }
 
   return (
-    <Container maxW='container.lg'>
+    <>
       <Head>
         <title>pointSixtyFive Tools - Update PPT</title>
       </Head>
 
-      <nav>
+      <nav style={{ marginBottom: '4rem' }}>
         <Breadcrumb spacing='8px' separator={<ChevronRightIcon />}>
           <BreadcrumbItem>
             <BreadcrumbLink href='/'>Tools</BreadcrumbLink>
@@ -215,7 +214,7 @@ export default function Ppt({ dbPptDate }) {
           )}
         </Flex>
       </main>
-    </Container>
+    </>
   );
 }
 
