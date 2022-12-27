@@ -7,8 +7,8 @@ export default function NavChrome() {
   const { user } = useUser();
 
   return (
-    <Container maxW={'100%'} backgroundColor={'blue.500'}>
-      <Flex height='4rem' justify={'flex-end'} alignItems='center' gap={4} paddingRight='4rem'>
+    <Container maxW='100%' backgroundColor='blue.500'>
+      <Flex height='4rem' justify='flex-end' alignItems='center' gap={4} paddingRight='4rem'>
         <Menu>
           <MenuButton
             as={Avatar}
