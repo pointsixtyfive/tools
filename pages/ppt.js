@@ -207,7 +207,7 @@ export default function Ppt({ dbPptDate }) {
 export async function getStaticProps() {
   await dbConnect();
 
-  const result = await PptDate.findOne({ 'Facility ID': 'Updated' });
+  const result = (await PptDate.findOne({ 'Facility ID': 'Updated' })) ?? 'Unknown';
 
   return { props: { dbPptDate: result['Facility Name'] } };
 }
