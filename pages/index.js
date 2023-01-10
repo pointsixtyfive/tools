@@ -1,23 +1,26 @@
-import Head from 'next/head';
+/* eslint-disable @next/next/no-html-link-for-pages */
 import Link from 'next/link';
-
-import { Box, Container, Flex } from '@chakra-ui/react';
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Container, Flex } from '@chakra-ui/react';
 
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
   return (
-    <Container maxW='container.lg'>
-      <Head>
-        <title>pointSixtyFive Tools</title>
-        <meta name='description' content='Admin tools for various features of pointsixtyfive.com' />
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
+    <>
+      <Container p={0} m={4}>
+        <nav style={{ marginBottom: '4rem' }}>
+          <Breadcrumb spacing='8px'>
+            <BreadcrumbItem isCurrentPage>
+              <BreadcrumbLink>Tools</BreadcrumbLink>
+            </BreadcrumbItem>
+          </Breadcrumb>
+        </nav>
+      </Container>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>pointSixtyFive Tools</h1>
+      <h1 className={styles.title}>pointSixtyFive Tools</h1>
 
-        <Flex align='center' justify='center' wrap='wrap'>
+      <Flex align='center' justify='center' wrap='wrap'>
+        <>
           <Link href='/ppt'>
             <Box className={styles.card}>
               <h2>Update PPT &rarr;</h2>
@@ -42,8 +45,8 @@ export default function Home() {
             <h2>Deploy &rarr;</h2>
             <p>Instantly deploy your Next.js site to a public URL with Vercel.</p>
           </a>
-        </Flex>
-      </main>
-    </Container>
+        </>
+      </Flex>
+    </>
   );
 }
