@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import {
@@ -11,6 +11,7 @@ import {
   FormHelperText,
   Button,
 } from '@chakra-ui/react';
+
 import { UserProvider, useUserData } from './context/UserContext';
 
 function Login({ setIsAuthenticated }) {

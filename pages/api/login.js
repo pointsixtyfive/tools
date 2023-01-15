@@ -1,14 +1,13 @@
-import xfConfig from '../../config/xfGroups';
 import axios from 'axios';
-
-const validUserGroups = process.env.NODE_ENV === 'development' ? [3, 4, 5] : [xfConfig.tools.ppt];
+import xfConfig from '../../config/xfGroups';
 
 export default async function login(req, res) {
+  const validUserGroups = process.env.NODE_ENV === 'development' ? [3, 4, 5] : [xfConfig.tools.ppt];
+
   if (req.method == 'POST') {
     const userLoginData = req.body;
 
-    const authData = await fetch(`${process.env.API_URL}/auth`, {
-      method: 'POST',
+    const options = {
       mode: 'cors',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -16,12 +15,14 @@ export default async function login(req, res) {
         'XF-Api-User': process.env.API_USER,
       },
       referrerPolicy: 'origin-when-cross-origin',
-      body: new URLSearchParams(userLoginData),
-    });
+    };
 
-    const data = await authData.json();
-    console.log(data);
+    const data = await axios
+      .post(`${process.env.API_URL}/auth`, userLoginData, options)
+      .then((res) => res.data)
+      .catch((e) => console.error(e));
 
+    //TODO: set up error handling, this doesnt work w/ axios
     if (data.errors) {
       res.status(400).send({ error: data.errors[0].message });
       return;
@@ -44,5 +45,9 @@ export default async function login(req, res) {
     } else {
       res.status(200).send({ userGroups, userInfo });
     }
+  }
+
+  if (req.method !== 'POST') {
+    res.status(405).send('This method is not allowed.');
   }
 }
