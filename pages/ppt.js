@@ -108,7 +108,7 @@ export default function Ppt({ dbPptDate }) {
       </Head>
 
       <Container p={0} m={4}>
-        <nav style={{ marginBottom: '4rem' }}>
+        <nav style={{ marginBottom: '2rem' }}>
           <Breadcrumb spacing='8px' separator={<ChevronRightIcon />}>
             <BreadcrumbItem>
               <BreadcrumbLink href='/'>Tools</BreadcrumbLink>
