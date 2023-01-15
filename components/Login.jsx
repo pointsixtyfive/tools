@@ -17,7 +17,9 @@ import { UserProvider, useUserData } from './context/UserContext';
 function Login({ setIsAuthenticated }) {
   const [values, setValues] = useState({
     username: '',
+    usernameTouched: false,
     password: '',
+    passwordTouched: false,
     showPassword: false,
   });
   const { userData, setUserData } = useUserData();
@@ -26,12 +28,25 @@ function Login({ setIsAuthenticated }) {
   const [openAlert, setOpenAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const isUsernameError = values.username === '' && values.usernameTouched;
+  const isPasswordError = values.password === '' && values.passwordTouched;
+
   useEffect(() => {
     document.body.addEventListener('keydown', handleEnterKeyPress);
     return () => {
       document.body.removeEventListener('keydown', handleEnterKeyPress);
     };
   }, []);
+
+  function handleFocus(e) {
+    const id = e.target.id;
+    const field = `${id}Touched`;
+    console.log(field);
+
+    setValues((prev) => {
+      return { ...prev, [field]: true };
+    });
+  }
 
   const handleEnterKeyPress = (e) => {
     if (e.key == 'Enter') {
@@ -112,12 +127,23 @@ function Login({ setIsAuthenticated }) {
           }}
           component='form'
         >
-          <FormControl sx={{ m: 1, width: '100%' }} variant='outlined'>
-            <FormLabel htmlFor='username'>Username</FormLabel>
+          <FormControl
+            sx={{ m: 1, width: '100%' }}
+            isInvalid={isUsernameError}
+            onBlur={(e) => handleFocus(e)}
+            variant='outlined'
+          >
+            <FormLabel>Username</FormLabel>
             <Input id='username' label='User Name' value={values.username} onChange={handleChange('username')} />
+            {!isUsernameError ? <FormHelperText /> : <FormErrorMessage>Username is required.</FormErrorMessage>}
           </FormControl>
 
-          <FormControl sx={{ m: 1, width: '100%' }} variant='outlined'>
+          <FormControl
+            sx={{ m: 1, width: '100%' }}
+            isInvalid={isPasswordError}
+            onBlur={(e) => handleFocus(e)}
+            variant='outlined'
+          >
             <FormLabel htmlFor='password'>Password</FormLabel>
             <Input
               id='password'
@@ -126,9 +152,17 @@ function Login({ setIsAuthenticated }) {
               onChange={handleChange('password')}
               label='Password'
             />
+            {!isPasswordError ? <FormHelperText /> : <FormErrorMessage>Password is required.</FormErrorMessage>}
           </FormControl>
           <FormControl sx={{ m: 1, width: '100%' }}>
-            <Button id='login' onClick={handleSubmit} loading={isLoading} loadingPosition='end' variant='contained'>
+            <Button
+              id='login'
+              onClick={handleSubmit}
+              isLoading={isLoading}
+              loadingText='Logging in...'
+              spinnerPlacement='start'
+              variant='outline'
+            >
               Login
             </Button>
           </FormControl>
