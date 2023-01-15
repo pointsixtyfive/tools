@@ -29,7 +29,7 @@ import {
 import { ChevronRightIcon, CheckCircleIcon } from '@chakra-ui/icons';
 
 import dbConnect from '../db/dbConnect';
-import PptDate from '../db/models/PptDate';
+// import PptDate from '../db/models/PptDate';
 import { pptFields } from '../config/ppt';
 import styles from '../styles/Home.module.css';
 
@@ -207,7 +207,8 @@ export default function Ppt({ dbPptDate }) {
 export async function getStaticProps() {
   await dbConnect();
 
-  const result = await PptDate.findOne({ 'Facility ID': 'Updated' });
+  // const result = await PptDate.findOne({ 'Facility ID': 'Updated' });
 
-  return { props: { dbPptDate: result['Facility Name'] ?? 'Unknown' } };
+  // return { props: { dbPptDate: result['Facility Name'] ?? 'Unknown' } };
+  return { props: { dbPptDate: '9/9/1999' } }; //TODO: temporarily disabled to allow the build to deploy prior to the db being ready
 }
