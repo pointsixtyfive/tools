@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import {
@@ -33,14 +33,7 @@ function Login({ setIsAuthenticated }) {
   const isUsernameError = values.username === '' && values.usernameTouched;
   const isPasswordError = values.password === '' && values.passwordTouched;
 
-  useEffect(() => {
-    document.body.addEventListener('keydown', handleEnterKeyPress);
-    return () => {
-      document.body.removeEventListener('keydown', handleEnterKeyPress);
-    };
-  }, []);
-
-  function handleFocus(e) {
+  function handleBlur(e) {
     const id = e.target.id;
     const field = `${id}Touched`;
     console.log(field);
@@ -50,27 +43,18 @@ function Login({ setIsAuthenticated }) {
     });
   }
 
-  const handleEnterKeyPress = (e) => {
+  function handleEnterKeyPress(e) {
+    if (values.passwordTouched === false && values.usernameTouched === false) return;
+    if (isLoading) return;
+
     if (e.key == 'Enter') {
-      if (isLoading) return;
       const loginButton = document.getElementById('login');
       loginButton.click();
     }
-  };
+  }
 
   const handleChange = (prop) => (e) => {
     setValues({ ...values, [prop]: e.target.value });
-  };
-
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
-  };
-
-  const handleMouseDownPassword = (e) => {
-    e.preventDefault();
   };
 
   const handleSubmit = async (e) => {
@@ -121,7 +105,7 @@ function Login({ setIsAuthenticated }) {
 
   return (
     <UserProvider userData={userData}>
-      <Container maxWidth='sm' sx={{ display: 'flex' }}>
+      <Container maxWidth='sm' sx={{ display: 'flex' }} onKeyDown={(e) => handleEnterKeyPress(e)}>
         <Box
           sx={{
             display: 'flex',
@@ -131,7 +115,7 @@ function Login({ setIsAuthenticated }) {
           }}
           component='form'
         >
-          <FormControl isInvalid={isUsernameError} onBlur={(e) => handleFocus(e)} variant='outlined'>
+          <FormControl isInvalid={isUsernameError} onBlur={(e) => handleBlur(e)} variant='outlined'>
             <FormLabel>Username</FormLabel>
             <Input id='username' label='User Name' value={values.username} onChange={handleChange('username')} />
             {!isUsernameError ? (
@@ -141,7 +125,7 @@ function Login({ setIsAuthenticated }) {
             )}
           </FormControl>
 
-          <FormControl isInvalid={isPasswordError} onBlur={(e) => handleFocus(e)} variant='outlined'>
+          <FormControl isInvalid={isPasswordError} onBlur={(e) => handleBlur(e)} variant='outlined'>
             <FormLabel>Password</FormLabel>
             <InputGroup>
               <Input
@@ -172,6 +156,7 @@ function Login({ setIsAuthenticated }) {
               <FormErrorMessage>Password is required.</FormErrorMessage>
             )}
           </FormControl>
+
           <FormControl>
             <Button
               id='login'
@@ -192,4 +177,6 @@ function Login({ setIsAuthenticated }) {
 
 export default Login;
 
-Login.propTypes = { setIsAuthenticated: PropTypes.func.isRequired };
+Login.propTypes = {
+  setIsAuthenticated: PropTypes.func.isRequired,
+};
