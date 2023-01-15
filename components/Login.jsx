@@ -5,11 +5,14 @@ import {
   Box,
   Container,
   Input,
+  InputGroup,
+  InputRightElement,
   FormControl,
   FormLabel,
   FormErrorMessage,
   FormHelperText,
   Button,
+  useToast,
 } from '@chakra-ui/react';
 
 import { UserProvider, useUserData } from './context/UserContext';
@@ -25,8 +28,7 @@ function Login({ setIsAuthenticated }) {
   const { userData, setUserData } = useUserData();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [openAlert, setOpenAlert] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const toastNotification = useToast();
 
   const isUsernameError = values.username === '' && values.usernameTouched;
   const isPasswordError = values.password === '' && values.passwordTouched;
@@ -76,8 +78,14 @@ function Login({ setIsAuthenticated }) {
 
     if (!values.username || !values.password) {
       console.error('login information not provided');
-      setErrorMessage('Please provide your login credientials.');
-      setOpenAlert(true);
+      toastNotification({
+        title: 'Login Error',
+        description: 'Please provide your login credientials.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+
       return;
     }
 
@@ -94,8 +102,13 @@ function Login({ setIsAuthenticated }) {
       .catch((e) => console.error('%%%%%%%%%%%%%%', e));
 
     if (!userData || userData.error) {
-      setErrorMessage(userData != undefined ? userData.error : 'Error fetching user: userData is undefined.');
-      setOpenAlert(true);
+      toastNotification({
+        title: 'Login Error',
+        description: 'Error fetching user: userData is undefined.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
     }
 
     setIsLoading(false);
@@ -104,15 +117,6 @@ function Login({ setIsAuthenticated }) {
       setUserData(userData);
       setIsAuthenticated(true);
     }
-  };
-
-  // Handlers for the MUI alerts for failed login
-  const handleCloseAlert = (e, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpenAlert(false);
   };
 
   return (
@@ -127,34 +131,48 @@ function Login({ setIsAuthenticated }) {
           }}
           component='form'
         >
-          <FormControl
-            sx={{ m: 1, width: '100%' }}
-            isInvalid={isUsernameError}
-            onBlur={(e) => handleFocus(e)}
-            variant='outlined'
-          >
+          <FormControl isInvalid={isUsernameError} onBlur={(e) => handleFocus(e)} variant='outlined'>
             <FormLabel>Username</FormLabel>
             <Input id='username' label='User Name' value={values.username} onChange={handleChange('username')} />
-            {!isUsernameError ? <FormHelperText /> : <FormErrorMessage>Username is required.</FormErrorMessage>}
+            {!isUsernameError ? (
+              <FormHelperText> </FormHelperText>
+            ) : (
+              <FormErrorMessage>Username is required.</FormErrorMessage>
+            )}
           </FormControl>
 
-          <FormControl
-            sx={{ m: 1, width: '100%' }}
-            isInvalid={isPasswordError}
-            onBlur={(e) => handleFocus(e)}
-            variant='outlined'
-          >
-            <FormLabel htmlFor='password'>Password</FormLabel>
-            <Input
-              id='password'
-              type={values.showPassword ? 'text' : 'password'}
-              value={values.password}
-              onChange={handleChange('password')}
-              label='Password'
-            />
-            {!isPasswordError ? <FormHelperText /> : <FormErrorMessage>Password is required.</FormErrorMessage>}
+          <FormControl isInvalid={isPasswordError} onBlur={(e) => handleFocus(e)} variant='outlined'>
+            <FormLabel>Password</FormLabel>
+            <InputGroup>
+              <Input
+                id='password'
+                type={values.showPassword ? 'text' : 'password'}
+                value={values.password}
+                onChange={handleChange('password')}
+                label='Password'
+              />
+              <InputRightElement width='4.5rem'>
+                <Button
+                  size='sm'
+                  onClick={() =>
+                    setValues((prev) => {
+                      return { ...prev, showPassword: !prev.showPassword };
+                    })
+                  }
+                  variant='ghost'
+                  style={{ boxShadow: 'none' }}
+                >
+                  {values.showPassword ? 'Hide' : 'Show'}
+                </Button>
+              </InputRightElement>
+            </InputGroup>
+            {!isPasswordError ? (
+              <FormHelperText> </FormHelperText>
+            ) : (
+              <FormErrorMessage>Password is required.</FormErrorMessage>
+            )}
           </FormControl>
-          <FormControl sx={{ m: 1, width: '100%' }}>
+          <FormControl>
             <Button
               id='login'
               onClick={handleSubmit}
