@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import {
@@ -11,14 +11,15 @@ import {
   FormHelperText,
   Button,
 } from '@chakra-ui/react';
+import { UserProvider, useUserData } from './context/UserContext';
 
 function Login({ setIsAuthenticated }) {
-  const [userData, setUserData] = useState({});
   const [values, setValues] = useState({
     username: '',
     password: '',
     showPassword: false,
   });
+  const { userData, setUserData } = useUserData();
 
   const [isLoading, setIsLoading] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
@@ -99,7 +100,7 @@ function Login({ setIsAuthenticated }) {
   };
 
   return (
-    <>
+    <UserProvider userData={userData}>
       <Container maxWidth='sm' sx={{ display: 'flex' }}>
         <Box
           sx={{
@@ -132,7 +133,7 @@ function Login({ setIsAuthenticated }) {
           </FormControl>
         </Box>
       </Container>
-    </>
+    </UserProvider>
   );
 }
 

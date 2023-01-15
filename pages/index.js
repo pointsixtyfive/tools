@@ -5,9 +5,12 @@ import Login from '../components/Login';
 import styles from '../styles/Home.module.css';
 import { useState } from 'react';
 import xfGroups from '../config/xfGroups';
+import { useUserData } from '../components/context/UserContext';
 
 export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { userData } = useUserData();
+  console.log(userData);
   return (
     <>
       <Container p={0} m={4}>
