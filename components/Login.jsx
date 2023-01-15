@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
+
 import {
   Box,
   Container,
@@ -17,7 +17,7 @@ import {
 
 import { UserProvider, useUserData } from './context/UserContext';
 
-function Login({ setIsAuthenticated }) {
+function Login() {
   const [values, setValues] = useState({
     username: '',
     usernameTouched: false,
@@ -99,7 +99,6 @@ function Login({ setIsAuthenticated }) {
 
     if (userData && !userData.error) {
       setUserData(userData);
-      setIsAuthenticated(true);
     }
   };
 
@@ -176,7 +175,3 @@ function Login({ setIsAuthenticated }) {
 }
 
 export default Login;
-
-Login.propTypes = {
-  setIsAuthenticated: PropTypes.func.isRequired,
-};

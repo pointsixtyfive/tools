@@ -1,4 +1,3 @@
-import { useState } from 'react';
 /* eslint-disable @next/next/no-html-link-for-pages */
 import Link from 'next/link';
 
@@ -11,9 +10,8 @@ import xfGroups from '../config/xfGroups';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { userData } = useUserData();
-
+  const isLoggedIn = userData?.userInfo;
   const permissions = {
     ppt: userData.userGroups?.includes(xfGroups.tools.ppt),
     test: false,
@@ -34,8 +32,8 @@ export default function Home() {
       <h1 className={styles.title}>pointSixtyFive Tools</h1>
 
       <Flex align='center' justify='center' wrap='wrap'>
-        {!isAuthenticated ? (
-          <Login setIsAuthenticated={setIsAuthenticated} />
+        {!isLoggedIn ? (
+          <Login />
         ) : (
           <>
             {permissions.ppt && (
