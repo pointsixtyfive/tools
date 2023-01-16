@@ -11,14 +11,14 @@ export default async function login(req, res) {
       mode: 'cors',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'XF-Api-Key': process.env.API_KEY,
-        'XF-Api-User': process.env.API_USER,
+        'XF-Api-Key': process.env.TOOLS_API_KEY,
+        'XF-Api-User': process.env.TOOLS_API_KEY,
       },
       referrerPolicy: 'origin-when-cross-origin',
     };
 
     const data = await axios
-      .post(`${process.env.API_URL}/auth`, userLoginData, options)
+      .post(`${process.env.XF_API_KEY}/auth`, userLoginData, options)
       .then((response) => response.data)
       .catch((e) => {
         console.log(e);
@@ -33,7 +33,7 @@ export default async function login(req, res) {
         }
       });
 
-    if (data?.user.secondary_group_ids === undefined || data.user.secondary_group_ids.length === 0) {
+    if (data?.user.secondary_group_ids.length === 0) {
       res.status(401).send({ message: 'You do not have permission to view this content.' });
       return;
     }
