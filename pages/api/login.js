@@ -40,6 +40,8 @@ export default async function login(req, res) {
       return;
     }
 
+    console.log('RESPONSE: ', res);
+
     const userGroups = data?.user.secondary_group_ids.filter((id) => validUserGroups.includes(id));
     const userInfo = {
       email: data.user.email,
