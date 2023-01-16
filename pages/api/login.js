@@ -26,10 +26,12 @@ export default async function login(req, res) {
           res
             .status(e.response.status)
             .send({ message: 'There was an error logging in. Make sure the username/password is correct.' });
+          return;
         }
 
         if (e.request) {
           res.status(e.request.status).send({ message: 'There was an error with the request.' });
+          return;
         }
       });
 
@@ -47,8 +49,10 @@ export default async function login(req, res) {
 
     if (!userGroups.length) {
       res.status(401).send({ message: 'You do not have permission to view this content.' });
+      return;
     } else {
       res.status(200).send({ userGroups, userInfo });
+      return;
     }
   }
 
