@@ -81,11 +81,11 @@ function Login() {
     };
 
     const userData = await axios
-      .post(`/api/login`, login, { mode: 'cors' })
+      .post(`api/login`, login, { mode: 'cors' })
       .then((response) => response.data)
       .catch((e) => {
         console.error(e);
-        toastMessage.current = e.message;
+        toastMessage.current = e.response.data.message;
       });
 
     if (!userData) {

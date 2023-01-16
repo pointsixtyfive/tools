@@ -21,20 +21,20 @@ export default async function login(req, res) {
       .post(`${process.env.API_URL}/auth`, userLoginData, options)
       .then((response) => response.data)
       .catch((e) => {
+        console.log(e);
         if (e.response) {
-          console.error(e.response.data);
-          console.error(e.response.status);
-          res.status(e.response.status).send('There was an error logging in...');
+          res
+            .status(e.response.status)
+            .send({ message: 'There was an error logging in. Make sure the username/password is correct.' });
         }
 
         if (e.request) {
-          console.error(e.request);
-          res.status(e.request.status).send('There was an error with the request.');
+          res.status(e.request.status).send({ message: 'There was an error with the request.' });
         }
       });
-    console.log(data);
+
     if (data?.user.secondary_group_ids === undefined || data.user.secondary_group_ids.length === 0) {
-      res.status(401).send('You do not have permission to view this content.');
+      res.status(401).send({ message: 'You do not have permission to view this content.' });
       return;
     }
 
@@ -46,13 +46,13 @@ export default async function login(req, res) {
     };
 
     if (!userGroups.length) {
-      res.status(401).send('You do not have permission to view this content.');
+      res.status(401).send({ message: 'You do not have permission to view this content.' });
     } else {
       res.status(200).send({ userGroups, userInfo });
     }
   }
 
   if (req.method !== 'POST') {
-    res.status(405).send('This method is not allowed.');
+    res.status(405).send({ message: 'This method is not allowed.' });
   }
 }
