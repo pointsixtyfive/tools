@@ -129,19 +129,24 @@ export default function Ppt({ dbPptDate }) {
       <Box p={4} style={{ borderLeft: '2px solid blue' }}>
         <OrderedList>
           <ListItem>
-            Modify the excel sheet by inserting the <Code>National</Code> data into rows at the end of the PPT.
-            Copy-paste the <Code>National</Code> data into it&apos;s row.
+            Modify the excel sheet by inserting the <Code>National</Code> data into a row at the end of the PPT.
+            Copy-paste the <Code>National</Code> data into it&apos;s row, and add missing data now or in step 5. (Note:
+            Remember to expand collapsed columns.)
             <Code display='block' maxWidth='fit-content'>
               <Table variant='unstyled' size='sm'>
                 <Thead>
                   <Tr>
                     <Th>Facility ID</Th>
+                    <Th>Category</Th>
+                    <Th>% Trainees</Th>
                     <Th>...etc</Th>
                   </Tr>
                 </Thead>
                 <Tbody>
                   <Tr>
                     <Td>National</Td>
+                    <Td>None</Td>
+                    <Td>xx.x%</Td>
                     <Td>...data</Td>
                   </Tr>
                 </Tbody>
@@ -149,14 +154,16 @@ export default function Ppt({ dbPptDate }) {
             </Code>
           </ListItem>
           <ListItem>Upload file</ListItem>
-          <ListItem>Select row containing the table headers</ListItem>
+          <ListItem>Select row containing the table headers.</ListItem>
           <ListItem>
             Verify columns match between the input & output (<CheckCircleIcon color='green.500' />
             ). If not, use the dropdown to match the input column with the correct output column. This should occur
             automatically. If not, something may be wrong with the excel file.
           </ListItem>
-          <ListItem>Verify there are no errors. National data may be missing fields (ie: Category)</ListItem>
-          <ListItem>The PPT date stored in the database is displayed. Update the date with the new PPT date.</ListItem>
+          <ListItem>Verify there are no errors. National data may be missing fields (ie: Category).</ListItem>
+          <ListItem>
+            The PPT date stored in the database is displayed below. Update the date with the new version&apos;s date.
+          </ListItem>
         </OrderedList>
       </Box>
 
@@ -212,6 +219,6 @@ export async function getStaticProps() {
 
   const result = await PptDate.findOne({ 'Facility ID': 'Updated' });
   const date = result['Facility Name'] ?? 'Unknown';
-  console.log(date);
+
   return { props: { dbPptDate: date } };
 }
