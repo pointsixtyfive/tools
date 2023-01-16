@@ -33,12 +33,12 @@ export default async function login(req, res) {
         }
       });
     console.log(data);
-    if (!data.user.secondary_group_ids) {
+    if (data?.user.secondary_group_ids === undefined || data.user.secondary_group_ids.length === 0) {
       res.status(401).send('You do not have permission to view this content.');
       return;
     }
 
-    const userGroups = data.user.secondary_group_ids?.filter((id) => validUserGroups.includes(id));
+    const userGroups = data?.user.secondary_group_ids.filter((id) => validUserGroups.includes(id));
     const userInfo = {
       email: data.user.email,
       gravatar: data.user.gravatar,
