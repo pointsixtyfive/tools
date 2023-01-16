@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import axios from 'axios';
 
 import {
@@ -29,6 +29,7 @@ function Login() {
 
   const [isLoading, setIsLoading] = useState(false);
   const toastNotification = useToast();
+  const toastMessage = useRef(null);
 
   const isUsernameError = values.username === '' && values.usernameTouched;
   const isPasswordError = values.password === '' && values.passwordTouched;
@@ -84,19 +85,13 @@ function Login() {
       .then((response) => response.data)
       .catch((e) => {
         console.error(e);
-        toastNotification({
-          title: 'Login Error',
-          description: e.message,
-          status: 'error',
-          duration: 3000,
-          isClosable: true,
-        });
+        toastMessage.current = e.message;
       });
 
     if (!userData) {
       toastNotification({
         title: 'Login Error',
-        description: 'Error fetching user: userData is undefined.',
+        description: toastMessage.current ?? 'Error fetching user: userData is undefined.',
         status: 'error',
         duration: 3000,
         isClosable: true,
@@ -105,10 +100,12 @@ function Login() {
 
     setIsLoading(false);
 
-    if (userData && !userData.error) {
+    if (userData) {
       setUserData(userData);
     }
   };
+
+  toastMessage.current = null;
 
   return (
     <UserProvider userData={userData}>
