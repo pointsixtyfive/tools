@@ -10,8 +10,7 @@ import xfGroups from '../config/xfGroups';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
-  const { userData } = useUserData();
-  const isLoggedIn = userData?.userInfo;
+  const { isLoggedIn, userData } = useUserData();
   const permissions = {
     ppt: userData.userGroups?.includes(xfGroups.tools.ppt),
     test: false,

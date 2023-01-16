@@ -6,8 +6,7 @@ import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { useUserData } from './context/UserContext';
 
 export default function NavChrome() {
-  const { userData, setUserData } = useUserData();
-  const isLoggedIn = userData?.userInfo;
+  const { isLoggedIn, userData, setUserData } = useUserData();
 
   return (
     <Container maxW='100%' backgroundColor='blue.500'>

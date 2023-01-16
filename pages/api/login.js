@@ -2,7 +2,7 @@ import axios from 'axios';
 import xfConfig from '../../config/xfGroups';
 
 export default async function login(req, res) {
-  const validUserGroups = process.env.NODE_ENV === 'development' ? [3, 4, 5] : [xfConfig.tools.ppt];
+  const validUserGroups = [xfConfig.tools.ppt];
 
   if (req.method == 'POST') {
     const userLoginData = req.body;

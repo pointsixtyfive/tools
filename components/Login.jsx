@@ -81,7 +81,7 @@ function Login() {
     };
 
     const userData = await axios
-      .post(`http://${window.location.host}/api/login`, login, { mode: 'cors' })
+      .post(`/api/login`, login, { mode: 'cors' })
       .then((response) => response.data)
       .catch((e) => console.error('%%%%%%%%%%%%%%', e));
 

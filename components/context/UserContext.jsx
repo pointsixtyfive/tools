@@ -4,7 +4,8 @@ const UserContext = createContext();
 
 function UserProvider({ children }) {
   const [userData, setUserData] = useState({});
-  const value = { userData, setUserData };
+  const isLoggedIn = !!userData?.userInfo;
+  const value = { isLoggedIn, userData, setUserData };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
 
