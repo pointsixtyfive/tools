@@ -32,13 +32,13 @@ export default async function login(req, res) {
           res.status(e.request.status).send('There was an error with the request.');
         }
       });
-
+    console.log(data);
     if (!data.user.secondary_group_ids) {
       res.status(401).send('You do not have permission to view this content.');
       return;
     }
 
-    const userGroups = data.user.secondary_group_ids.filter((id) => validUserGroups.includes(id));
+    const userGroups = data.user.secondary_group_ids?.filter((id) => validUserGroups.includes(id));
     const userInfo = {
       email: data.user.email,
       gravatar: data.user.gravatar,
