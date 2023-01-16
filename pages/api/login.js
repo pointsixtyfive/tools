@@ -19,14 +19,21 @@ export default async function login(req, res) {
 
     const data = await axios
       .post(`${process.env.API_URL}/auth`, userLoginData, options)
-      .then((res) => res.data)
-      .catch((e) => console.error(e));
+      .then((response) => response.data)
+      .catch((e) => {
+        if (e.response) {
+          console.error(e.response.data);
+          console.error(e.response.status);
+          res.status(e.response.status).send('There was an error logging in...');
+        }
 
-    //TODO: set up error handling, this doesnt work w/ axios
-    if (data.errors) {
-      res.status(400).send({ error: data.errors[0].message });
-      return;
-    }
+        if (e.request) {
+          console.error(e.request);
+          res.status(e.request.status).send('There was an error with the request.');
+        }
+
+        console.error(e.toJSON());
+      });
 
     if (!data.user.secondary_group_ids) {
       res.status(401).send('You do not have permission to view this content.');
