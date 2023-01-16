@@ -36,7 +36,6 @@ function Login() {
   function handleBlur(e) {
     const id = e.target.id;
     const field = `${id}Touched`;
-    console.log(field);
 
     setValues((prev) => {
       return { ...prev, [field]: true };
@@ -83,9 +82,18 @@ function Login() {
     const userData = await axios
       .post(`/api/login`, login, { mode: 'cors' })
       .then((response) => response.data)
-      .catch((e) => console.error('%%%%%%%%%%%%%%', e));
+      .catch((e) => {
+        console.error(e);
+        toastNotification({
+          title: 'Login Error',
+          description: e.message,
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+      });
 
-    if (!userData || userData.error) {
+    if (!userData) {
       toastNotification({
         title: 'Login Error',
         description: 'Error fetching user: userData is undefined.',

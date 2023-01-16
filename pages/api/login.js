@@ -31,8 +31,6 @@ export default async function login(req, res) {
           console.error(e.request);
           res.status(e.request.status).send('There was an error with the request.');
         }
-
-        console.error(e.toJSON());
       });
 
     if (!data.user.secondary_group_ids) {
