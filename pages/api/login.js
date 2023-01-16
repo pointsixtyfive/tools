@@ -12,7 +12,7 @@ export default async function login(req, res) {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         'XF-Api-Key': process.env.TOOLS_API_KEY,
-        'XF-Api-User': process.env.TOOLS_API_KEY,
+        'XF-Api-User': process.env.TOOLS_API_USER,
       },
       referrerPolicy: 'origin-when-cross-origin',
     };
