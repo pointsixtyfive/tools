@@ -21,8 +21,7 @@ export default async function login(req, res) {
       .post(`${process.env.XF_API_URL}/auth`, userLoginData, options)
       .then((response) => response.data)
       .catch((e) => {
-        console.log(e);
-        if (e.response) {
+        if (e.response.status === 400) {
           res
             .status(e.response.status)
             .send({ message: 'There was an error logging in. Make sure the username/password is correct.' });
@@ -39,8 +38,6 @@ export default async function login(req, res) {
       res.status(401).send({ message: 'You do not have permission to view this content.' });
       return;
     }
-
-    console.log('RESPONSE: ', res);
 
     const userGroups = data?.user.secondary_group_ids.filter((id) => validUserGroups.includes(id));
     const userInfo = {

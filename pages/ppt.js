@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { ReactSpreadsheetImport } from 'react-spreadsheet-import';
 import Head from 'next/head';
+import Link from 'next/link';
 
 import {
   Box,
@@ -111,7 +112,9 @@ export default function Ppt({ dbPptDate }) {
         <nav style={{ marginBottom: '2rem' }}>
           <Breadcrumb spacing='8px' separator={<ChevronRightIcon />}>
             <BreadcrumbItem>
-              <BreadcrumbLink href='/'>Tools</BreadcrumbLink>
+              <Link href='/'>
+                <BreadcrumbLink>Tools</BreadcrumbLink>
+              </Link>
             </BreadcrumbItem>
 
             <BreadcrumbItem isCurrentPage>

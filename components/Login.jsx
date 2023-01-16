@@ -61,7 +61,6 @@ function Login() {
     e.preventDefault();
 
     if (!values.username || !values.password) {
-      console.error('login information not provided');
       toastNotification({
         title: 'Login Error',
         description: 'Please provide your login credientials.',
@@ -84,7 +83,6 @@ function Login() {
       .post(`api/login`, login, { mode: 'cors' })
       .then((response) => response.data)
       .catch((e) => {
-        console.error(e);
         toastMessage.current = e.response.data.message;
       });
 
