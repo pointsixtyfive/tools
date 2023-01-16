@@ -18,7 +18,7 @@ export default async function login(req, res) {
     };
 
     const data = await axios
-      .post(`${process.env.XF_API_KEY}/auth`, userLoginData, options)
+      .post(`${process.env.XF_API_URL}/auth`, userLoginData, options)
       .then((response) => response.data)
       .catch((e) => {
         console.log(e);
