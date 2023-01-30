@@ -30,11 +30,9 @@ export default async function submit(req, res) {
       }
       res.status(201).json(result);
     } else {
-      console.error(`METHOD ${method} NOT SUPPORTED`);
       res.status(405).json({ status: 405 });
     }
   } catch (e) {
-    console.error(e);
     res.status(500).json({ status: 500, data: { ok: 0, errorMsg: 'There was an error.' } });
   }
 }

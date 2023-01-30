@@ -11,29 +11,35 @@ export default async function login(req, res) {
       mode: 'cors',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'XF-Api-Key': process.env.API_KEY,
-        'XF-Api-User': process.env.API_USER,
+        'XF-Api-Key': process.env.TOOLS_API_KEY,
+        'XF-Api-User': process.env.TOOLS_API_USER,
       },
       referrerPolicy: 'origin-when-cross-origin',
     };
 
     const data = await axios
-      .post(`${process.env.API_URL}/auth`, userLoginData, options)
-      .then((res) => res.data)
-      .catch((e) => console.error(e));
+      .post(`${process.env.XF_API_URL}/auth`, userLoginData, options)
+      .then((response) => response.data)
+      .catch((e) => {
+        if (e.response.status === 400) {
+          res
+            .status(e.response.status)
+            .send({ message: 'There was an error logging in. Make sure the username/password is correct.' });
+          return;
+        }
 
-    //TODO: set up error handling, this doesnt work w/ axios
-    if (data.errors) {
-      res.status(400).send({ error: data.errors[0].message });
+        if (e.request) {
+          res.status(e.request.status).send({ message: 'There was an error with the request.' });
+          return;
+        }
+      });
+
+    if (data?.user.secondary_group_ids.length === 0) {
+      res.status(401).send({ message: 'You do not have permission to view this content.' });
       return;
     }
 
-    if (!data.user.secondary_group_ids) {
-      res.status(401).send('You do not have permission to view this content.');
-      return;
-    }
-
-    const userGroups = data.user.secondary_group_ids.filter((id) => validUserGroups.includes(id));
+    const userGroups = data?.user.secondary_group_ids.filter((id) => validUserGroups.includes(id));
     const userInfo = {
       email: data.user.email,
       gravatar: data.user.gravatar,
@@ -41,13 +47,15 @@ export default async function login(req, res) {
     };
 
     if (!userGroups.length) {
-      res.status(401).send('You do not have permission to view this content.');
+      res.status(401).send({ message: 'You do not have permission to view this content.' });
+      return;
     } else {
       res.status(200).send({ userGroups, userInfo });
+      return;
     }
   }
 
   if (req.method !== 'POST') {
-    res.status(405).send('This method is not allowed.');
+    res.status(405).send({ message: 'This method is not allowed.' });
   }
 }

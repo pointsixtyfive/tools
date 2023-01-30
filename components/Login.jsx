@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import axios from 'axios';
 
 import {
@@ -29,6 +29,7 @@ function Login() {
 
   const [isLoading, setIsLoading] = useState(false);
   const toastNotification = useToast();
+  const toastMessage = useRef(null);
 
   const isUsernameError = values.username === '' && values.usernameTouched;
   const isPasswordError = values.password === '' && values.passwordTouched;
@@ -36,7 +37,6 @@ function Login() {
   function handleBlur(e) {
     const id = e.target.id;
     const field = `${id}Touched`;
-    console.log(field);
 
     setValues((prev) => {
       return { ...prev, [field]: true };
@@ -61,7 +61,6 @@ function Login() {
     e.preventDefault();
 
     if (!values.username || !values.password) {
-      console.error('login information not provided');
       toastNotification({
         title: 'Login Error',
         description: 'Please provide your login credientials.',
@@ -81,14 +80,16 @@ function Login() {
     };
 
     const userData = await axios
-      .post(`/api/login`, login, { mode: 'cors' })
+      .post(`api/login`, login, { mode: 'cors' })
       .then((response) => response.data)
-      .catch((e) => console.error('%%%%%%%%%%%%%%', e));
+      .catch((e) => {
+        toastMessage.current = e.response.data.message;
+      });
 
-    if (!userData || userData.error) {
+    if (!userData) {
       toastNotification({
         title: 'Login Error',
-        description: 'Error fetching user: userData is undefined.',
+        description: toastMessage.current ?? 'Error fetching user: userData is undefined.',
         status: 'error',
         duration: 3000,
         isClosable: true,
@@ -97,10 +98,12 @@ function Login() {
 
     setIsLoading(false);
 
-    if (userData && !userData.error) {
+    if (userData) {
       setUserData(userData);
     }
   };
+
+  toastMessage.current = null;
 
   return (
     <UserProvider userData={userData}>
