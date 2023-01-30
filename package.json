@@ -23,7 +23,7 @@
     "react-spreadsheet-import": "^2.0.8"
   },
   "devDependencies": {
-    "eslint": "8.30.0",
+    "eslint": "^8.33.0",
     "eslint-config-next": "^12.3.4",
     "eslint-config-prettier": "^8.5.0",
     "prettier": "^2.8.3"
