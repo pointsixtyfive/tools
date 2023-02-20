@@ -102,10 +102,11 @@ export default function Ppt({ dbPptDate }) {
     }
 
     const revalidate = await axios.get(`/api/revalidate?secret=673141DD739654E6A977BD37B3BCE`);
-    if (response.status === 401 || response.status === 500) {
+    if (revalidate.status === 401 || revalidate.status === 500) {
       toastError.description = revalidate.message;
       toast(toastError);
-    } else {
+    }
+    if (revalidate.status === 200) {
       router.reload(window.location.pathname);
     }
 
