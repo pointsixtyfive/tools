@@ -93,9 +93,16 @@ export default function Ppt({ dbPptDate }) {
     if (response.status === 201) {
       toastSuccess.description = `Date updated.`;
       toast(toastSuccess);
-      setCurrentPptDate(data.newDate);
+      // setCurrentPptDate(data.newDate);
     } else {
       toastError.description = `There was an error. Error ${response.status}`;
+      toast(toastError);
+    }
+
+    const revalidate = await axios.get(`/api/revalidate?secret=673141DD739654E6A977BD37B3BCE`);
+    console.log(revalidate);
+    if (response.status === 401 || response.status === 500) {
+      toastError.description = revalidate.message;
       toast(toastError);
     }
 
