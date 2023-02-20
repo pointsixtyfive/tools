@@ -3,6 +3,7 @@ import axios from 'axios';
 import { ReactSpreadsheetImport } from 'react-spreadsheet-import';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import {
   Box,
@@ -42,6 +43,7 @@ export default function Ppt({ dbPptDate }) {
   const [currentPptDate /* setCurrentPptDate */] = useState(dbPptDate);
   const toast = useToast();
   const dateRegex = new RegExp('^(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])/20\\d\\d$');
+  const router = useRouter();
 
   const toastCfg = { duration: 2500, isClosable: true, description: `` };
   const toastSuccess = {
@@ -100,10 +102,11 @@ export default function Ppt({ dbPptDate }) {
     }
 
     const revalidate = await axios.get(`/api/revalidate?secret=673141DD739654E6A977BD37B3BCE`);
-    console.log(revalidate);
     if (response.status === 401 || response.status === 500) {
       toastError.description = revalidate.message;
       toast(toastError);
+    } else {
+      router.reload(window.location.pathname);
     }
 
     setNewDate('');
