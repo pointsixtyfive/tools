@@ -40,7 +40,6 @@ export default function Ppt({ dbPptDate }) {
   const [isLoading, setIsLoading] = useState(false);
   const [dateIsLoading, setDateIsLoading] = useState(false);
   const [newDate, setNewDate] = useState('');
-  const [currentPptDate /* setCurrentPptDate */] = useState(dbPptDate);
   const toast = useToast();
   const dateRegex = new RegExp('^(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])/20\\d\\d$');
   const router = useRouter();
@@ -80,7 +79,7 @@ export default function Ppt({ dbPptDate }) {
       return;
     }
 
-    if (newDate.match(currentPptDate)) {
+    if (newDate.match(dbPptDate)) {
       toastError.description = 'This date matches the current data.';
       toast(toastError);
       return;
@@ -90,12 +89,9 @@ export default function Ppt({ dbPptDate }) {
     const response = await axios.post(`api/submit?date=${updatedDate}`);
     setDateIsLoading(false);
 
-    // const { data } = response;
-
     if (response.status === 201) {
       toastSuccess.description = `Date updated.`;
       toast(toastSuccess);
-      // setCurrentPptDate(data.newDate);
     } else {
       toastError.description = `There was an error. Error ${response.status}`;
       toast(toastError);
@@ -190,7 +186,7 @@ export default function Ppt({ dbPptDate }) {
           <Flex gap={2}>
             <Text>Current PPT Date:</Text>
             <Text flex={1} align='center'>
-              {currentPptDate}
+              {dbPptDate}
             </Text>
           </Flex>
           <Flex gap={2}>
