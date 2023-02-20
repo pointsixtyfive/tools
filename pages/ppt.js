@@ -39,7 +39,7 @@ export default function Ppt({ dbPptDate }) {
   const [isLoading, setIsLoading] = useState(false);
   const [dateIsLoading, setDateIsLoading] = useState(false);
   const [newDate, setNewDate] = useState('');
-  const [currentPptDate, setCurrentPptDate] = useState(dbPptDate);
+  const [currentPptDate /* setCurrentPptDate */] = useState(dbPptDate);
   const toast = useToast();
   const dateRegex = new RegExp('^(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])/20\\d\\d$');
 
@@ -88,7 +88,7 @@ export default function Ppt({ dbPptDate }) {
     const response = await axios.post(`api/submit?date=${updatedDate}`);
     setDateIsLoading(false);
 
-    const { data } = response;
+    // const { data } = response;
 
     if (response.status === 201) {
       toastSuccess.description = `Date updated.`;
