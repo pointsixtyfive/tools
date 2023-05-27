@@ -57,5 +57,8 @@ export default async function login(req, res) {
 
   if (req.method !== 'POST') {
     res.status(405).send({ message: 'This method is not allowed.' });
+    return;
   }
+
+  res.status(500).send({ message: 'An unknown error occurred.' });
 }
