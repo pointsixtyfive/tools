@@ -1,7 +1,7 @@
 import axios from 'axios';
 import xfConfig from '../../config/xfGroups';
 
-export default async function login(req, res) {
+async function login(req, res) {
   const validUserGroups = [xfConfig.tools.ppt];
 
   if (req.method == 'POST') {
@@ -62,3 +62,5 @@ export default async function login(req, res) {
 
   res.status(500).send({ message: 'An unknown error occurred.' });
 }
+
+export default login;
