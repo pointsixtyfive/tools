@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import axios from 'axios';
 
 import {
   Box,
@@ -79,13 +78,28 @@ function Login() {
       password: values.password,
     };
 
-    const userData = await axios
-      .post(`api/login`, login, { mode: 'cors' })
-      .then((response) => response.data)
-      .catch((e) => {
-        toastMessage.current = e.response.data.message;
-      });
+    const userData = await fetch('api/login', { method: 'POST', body: JSON.stringify(login), mode: 'cors' })
+      .then(async (response) => {
+        const data = await response.json();
+        toastMessage.current = data.message;
 
+        if (response.status === 500) {
+          toastNotification({
+            title: 'Login Error',
+            description: toastMessage.current ?? 'Error fetching user: userData is undefined.',
+            status: 'error',
+            duration: 3000,
+            isClosable: true,
+          });
+        }
+
+        return data;
+      })
+      .catch((e) => {
+        console.log('Login.jsx :', e);
+        toastMessage.current = e.message;
+      });
+    console.log(userData);
     if (!userData) {
       toastNotification({
         title: 'Login Error',
@@ -97,10 +111,7 @@ function Login() {
     }
 
     setIsLoading(false);
-
-    if (userData) {
-      setUserData(userData);
-    }
+    setUserData(userData);
   };
 
   toastMessage.current = null;
