@@ -30,24 +30,7 @@ async function login(req, res) {
     });
 
     const data = await xfResponse.json();
-    console.log('DATA: ', data);
 
-    // const data = await axios
-    //   .post(`${process.env.XF_API_URL}/auth`, userLoginData, options)
-    //   .then((response) => response.data)
-    //   .catch((e) => {
-    //     if (e.response.status === 400) {
-    //       res
-    //         .status(e.response.status)
-    //         .send({ message: 'There was an error logging in. Make sure the username/password is correct.' });
-    //       return;
-    //     }
-
-    //     if (e.request) {
-    //       res.status(e.request.status).send({ message: 'There was an error with the request.' });
-    //       return;
-    //     }
-    //   });
     if (data.success) {
       if (data.user?.secondary_group_ids.length === 0) {
         res.status(401).send({ message: 'You do not have permission to view this content.' });
