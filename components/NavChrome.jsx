@@ -16,7 +16,7 @@ export default function NavChrome() {
           <MenuButton
             as={Avatar}
             aria-label='Options'
-            icon={<Avatar name={userData.userInfo?.userName} />}
+            icon={<Avatar name={userData.userInfo?.userName} src={userData.userInfo?.avatar} />}
             variant='outline'
           />
           {isLoggedIn && (
