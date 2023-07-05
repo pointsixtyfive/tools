@@ -96,10 +96,9 @@ function Login() {
         return data;
       })
       .catch((e) => {
-        console.log('Login.jsx :', e);
         toastMessage.current = e.message;
       });
-    console.log(userData);
+
     if (!userData) {
       toastNotification({
         title: 'Login Error',
