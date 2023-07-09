@@ -34,7 +34,6 @@ export default async function submit(req, res) {
       res.status(405).json({ status: 405 });
     }
   } catch (e) {
-    console.log(e);
-    res.status(500).json({ status: 500, data: { ok: 0, errorMsg: 'There was an error.' } });
+    res.status(500).json({ status: 500, data: { ok: 0, errorMsg: 'There was an unknown error.' } });
   }
 }
