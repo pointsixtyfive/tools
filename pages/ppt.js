@@ -33,7 +33,7 @@ import dbConnect from '../db/dbConnect';
 import PptDate from '../db/models/PptDate';
 import { pptFields } from '../config/ppt';
 import styles from '../styles/Home.module.css';
-//TODO: remove axios
+
 export default function Ppt({ dbPptDate }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -85,7 +85,11 @@ export default function Ppt({ dbPptDate }) {
     }
 
     setDateIsLoading(true);
-    const response = await axios.post(`api/submit?date=${updatedDate}`);
+    const response = await fetch(`api/submit?date=${updatedDate}`, {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify([]),
+    });
     setDateIsLoading(false);
 
     if (response.status === 201) {
@@ -96,7 +100,7 @@ export default function Ppt({ dbPptDate }) {
       toast(toastError);
     }
 
-    const revalidate = await axios.get(`/api/revalidate?secret=673141DD739654E6A977BD37B3BCE`);
+    const revalidate = await fetch(`/api/revalidate?secret=673141DD739654E6A977BD37B3BCE`);
     if (revalidate.status === 401 || revalidate.status === 500) {
       toastError.description = revalidate.message;
       toast(toastError);
