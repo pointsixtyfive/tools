@@ -4,7 +4,8 @@ import PptDate from '../../db/models/PptDate';
 
 export default async function submit(req, res) {
   await dbConnect();
-  const { body: data, method, query } = req;
+  const { body, method, query } = req;
+  const data = JSON.parse(body);
 
   try {
     if (method === 'POST') {
@@ -33,6 +34,7 @@ export default async function submit(req, res) {
       res.status(405).json({ status: 405 });
     }
   } catch (e) {
+    console.log(e);
     res.status(500).json({ status: 500, data: { ok: 0, errorMsg: 'There was an error.' } });
   }
 }

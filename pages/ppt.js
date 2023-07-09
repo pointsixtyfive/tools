@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { ReactSpreadsheetImport } from 'react-spreadsheet-import';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -34,7 +33,7 @@ import dbConnect from '../db/dbConnect';
 import PptDate from '../db/models/PptDate';
 import { pptFields } from '../config/ppt';
 import styles from '../styles/Home.module.css';
-
+//TODO: remove axios
 export default function Ppt({ dbPptDate }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -58,13 +57,13 @@ export default function Ppt({ dbPptDate }) {
 
   async function handleSubmit(validData) {
     setIsLoading(true);
-    const response = await axios.post('api/submit', validData);
+    const response = await fetch('api/submit', { method: 'POST', mode: 'cors', body: JSON.stringify(validData) });
     setIsLoading(false);
 
-    const { data } = response;
+    const data = await response.json();
 
     if (response.status === 201) {
-      toastSuccess.description = `${data?.nModified + data?.nInserted + data?.nUpserted} records updated.`;
+      toastSuccess.description = `${data?.modifiedCount + data?.insertedCount + data?.upsertedCount} records updated.`;
       toast(toastSuccess);
     } else {
       toastError.description = `There was an error. Error ${response.status}`;
@@ -119,9 +118,9 @@ export default function Ppt({ dbPptDate }) {
         <nav style={{ marginBottom: '2rem' }}>
           <Breadcrumb spacing='8px' separator={<ChevronRightIcon />}>
             <BreadcrumbItem>
-              <Link href='/'>
-                <BreadcrumbLink>Tools</BreadcrumbLink>
-              </Link>
+              <BreadcrumbLink as={Link} href='/'>
+                Tools
+              </BreadcrumbLink>
             </BreadcrumbItem>
 
             <BreadcrumbItem isCurrentPage>
